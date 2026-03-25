@@ -76,6 +76,13 @@ body {
   cursor: pointer;
 }
 
+.listButton:focus-visible,
+.listButtonActive {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .muted {
   color: #6b7280;
 }
