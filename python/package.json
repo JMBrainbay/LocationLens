@@ -1,0 +1,17 @@
+{
+  "name": "nl-location-lens",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.12.3",
+  "scripts": {
+    "dev": "corepack pnpm --parallel --filter \"./apps/*\" dev",
+    "test": "corepack pnpm -r test",
+    "typecheck": "corepack pnpm -r typecheck",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down --remove-orphans",
+    "workshop:reset:fixture": "./scripts/workshop-reset.sh fixture",
+    "workshop:reset:live": "./scripts/workshop-reset.sh live",
+    "workshop:prep:fixture": "./scripts/workshop-reset.sh fixture --no-start",
+    "workshop:prep:live": "./scripts/workshop-reset.sh live --no-start"
+  }
+}

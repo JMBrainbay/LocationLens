@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: nl-location-lens-api
+Version: 0.1.0
+Summary: Workshop starter API for Dutch location intelligence
+Requires-Python: >=3.9
+Requires-Dist: eval-type-backport>=0.3.0
+Requires-Dist: fastapi>=0.116.0
+Requires-Dist: httpx>=0.27.0
+Requires-Dist: mypy>=1.14.0
+Requires-Dist: pydantic>=2.9.0
+Requires-Dist: pydantic-settings>=2.6.0
+Requires-Dist: pytest>=8.3.0
+Requires-Dist: uvicorn>=0.32.0
