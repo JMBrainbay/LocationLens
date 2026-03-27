@@ -14,7 +14,11 @@ async def profile(request: Request, id: str = Query(..., min_length=1)) -> Locat
 
     place = await place_provider.resolve(id.strip())
     if not place:
-        raise ApiError("not_found", f"Place not found for id '{id}'", 404)
+        raise ApiError(
+            "not_found",
+            "No place matches that ID. Copy an ID from /api/places/suggest (fixture mode includes IDs like adr-damrak-1-amsterdam).",
+            404,
+        )
 
     building, building_source = await building_provider.building_for(place)
     metrics, metrics_source = await metrics_provider.metrics_for(place)

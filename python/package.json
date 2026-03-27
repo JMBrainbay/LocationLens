@@ -2,16 +2,22 @@
   "name": "nl-location-lens",
   "private": true,
   "version": "0.1.0",
-  "packageManager": "pnpm@9.12.3",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "corepack pnpm --parallel --filter \"./apps/*\" dev",
-    "test": "corepack pnpm -r test",
-    "typecheck": "corepack pnpm -r typecheck",
+    "dev": "concurrently -n web,api -c blue,green \"npm run dev -w @nl-location-lens/web\" \"npm run dev -w @nl-location-lens/api\"",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
     "docker:up": "docker compose up --build",
     "docker:down": "docker compose down --remove-orphans",
     "workshop:reset:fixture": "./scripts/workshop-reset.sh fixture",
     "workshop:reset:live": "./scripts/workshop-reset.sh live",
     "workshop:prep:fixture": "./scripts/workshop-reset.sh fixture --no-start",
     "workshop:prep:live": "./scripts/workshop-reset.sh live --no-start"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }

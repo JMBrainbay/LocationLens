@@ -11,7 +11,7 @@ async def suggest(request: Request, q: str = Query(default="", description="Sear
     if len(q.strip()) < 2:
         return SuggestResponse(query=q, results=[])
     if len(q) > 200:
-        raise ApiError("invalid_query", "Query is too long", 400)
+        raise ApiError("invalid_query", "Search text is too long (max 200 characters).", 400)
 
     provider = request.app.state.place_provider
     results = await provider.suggest(q.strip())

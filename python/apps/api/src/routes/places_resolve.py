@@ -11,5 +11,9 @@ async def resolve(request: Request, id: str = Query(..., min_length=1)) -> Resol
     provider = request.app.state.place_provider
     place = await provider.resolve(id.strip())
     if not place:
-        raise ApiError("not_found", f"Place not found for id '{id}'", 404)
+        raise ApiError(
+            "not_found",
+            "No place matches that ID. Copy an ID from /api/places/suggest (fixture mode includes IDs like adr-damrak-1-amsterdam).",
+            404,
+        )
     return place

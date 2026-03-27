@@ -23,17 +23,17 @@ CMD ["python", "-m", "uvicorn", "src.app:app", "--host", "0.0.0.0", "--port", "4
 
 FROM node:20-alpine AS web
 WORKDIR /app
-RUN corepack enable
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /app/
-COPY apps/web/package.json /app/apps/web/package.json
-COPY packages/contracts/package.json /app/packages/contracts/package.json
+COPY package.json package-lock.json ./
+COPY apps/web/package.json apps/web/
+COPY packages/contracts/package.json packages/contracts/
+COPY apps/api/package.json apps/api/
 
-RUN corepack pnpm install --frozen-lockfile
+RUN npm ci
 
-COPY apps/web /app/apps/web
-COPY packages/contracts /app/packages/contracts
+COPY apps/web apps/web
+COPY packages/contracts packages/contracts
 
-WORKDIR /app/apps/web
+WORKDIR /app
 EXPOSE 3000
-CMD ["corepack", "pnpm", "exec", "next", "dev", "-p", "3000", "-H", "0.0.0.0"]
+CMD ["npm", "run", "dev", "-w", "@nl-location-lens/web", "--", "-H", "0.0.0.0"]

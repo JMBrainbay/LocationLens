@@ -26,7 +26,7 @@ async def compare(
     right: str = Query(..., min_length=1),
 ) -> CompareResponse:
     if left == right:
-        raise ApiError("invalid_compare", "left and right must differ", 400)
+        raise ApiError("invalid_compare", "Choose two different place IDs to compare.", 400)
 
     left_profile = await profile(request, left)
     right_profile = await profile(request, right)

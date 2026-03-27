@@ -42,18 +42,18 @@ pkill -f "next dev -p 3000" >/dev/null 2>&1 || true
 echo "Stopped old dev processes (if running)."
 
 cd "$ROOT_DIR"
-corepack pnpm install >/dev/null
-echo "Ensured pnpm dependencies are installed."
+npm install >/dev/null
+echo "Ensured npm dependencies are installed."
 
 if ! python3 -c "import fastapi, httpx, pydantic, pydantic_settings, pytest, mypy, uvicorn, eval_type_backport" >/dev/null 2>&1; then
-  echo "Installing missing Python dependencies..."
-  python3 -m pip install fastapi httpx pydantic pydantic-settings pytest mypy uvicorn eval_type_backport >/dev/null
+  echo "Installing Python API dependencies..."
+  python3 -m pip install -e "$ROOT_DIR/apps/api" >/dev/null
 fi
 
 if [[ "$START_FLAG" == "--no-start" ]]; then
-  echo "Reset complete. Start manually with: corepack pnpm dev"
+  echo "Reset complete. Start manually with: npm run dev"
   exit 0
 fi
 
 echo "Starting API and web..."
-corepack pnpm dev
+npm run dev
